@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+
+
 using namespace std;
 
 class Polynomial {
@@ -11,12 +13,21 @@ class Polynomial {
 		Polynomial();
 		void set_degree();
 		void set_degree(int n);
+		void set_corre (double *user);
 		void set_corre();
 		void reset();
 		//optional
 		int get_degree ();
 		void get_corre();
 };
+void Polynomial :: set_corre (double *user){
+	if (degree != -1) {
+		corre = new double[degree+1];
+		for (int i = degree; i >= 0; i --){
+			*(corre+i) = *(user+i);
+		}
+	}
+}
 void Polynomial :: reset (){
 	if (degree != -1){
 		delete [] corre;
@@ -73,7 +84,12 @@ int main (int argc, char **argv){
 	Polynomial poly1;
 	poly1.set_degree(3);
 	//cout << poly1.get_degree() << endl;
-	poly1.set_corre();
-
+	//poly1.set_corre();
+	double tmp[4];
+	for (int i = 0; i <= 4; i ++){
+		*(tmp+i) = 1;
+	}
+	poly1.set_corre(tmp);
+	poly1.get_corre();
 	return 0;
 }
